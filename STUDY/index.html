@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff4f8">
+  <meta name="description" content="STUDY — seu cantinho delicado para escrever, organizar e acompanhar suas redações.">
+  <title>STUDY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#inicio" aria-label="STUDY início">STUDY<span>♡</span></a>
+      <p class="side-caption">SEU ESPAÇO DE APRENDIZADO</p>
+      <nav class="nav-menu" aria-label="Menu principal">
+        <a class="nav-link active" href="#inicio"><span>⌂</span> Início</a>
+        <a class="nav-link" href="#nova-redacao"><span>✎</span> Nova redação</a>
+        <a class="nav-link" href="#minhas-redacoes"><span>▤</span> Minhas redações</a>
+        <a class="nav-link" href="#correcao"><span>♡</span> Revisar escrita</a>
+        <a class="nav-link" href="#progresso"><span>↗</span> Meu progresso</a>
+      </nav>
+      <div class="sidebar-note">
+        <span class="note-flower">✿</span>
+        <p>Um passo de cada vez.<br><strong>Você está evoluindo.</strong></p>
+      </div>
+      <div class="sidebar-tools">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Ativar modo escuro" aria-pressed="false">
+          <span class="theme-icon" id="theme-icon">☾</span>
+          <span id="theme-label">Modo escuro</span>
+        </button>
+      </div>
+      <div class="side-bottom">Feito com carinho ♡</div>
+    </aside>
+
+    <main class="main-content">
+      <div class="mobile-top"><button id="menu-toggle" class="icon-button" aria-label="Abrir menu">☰</button><span>STUDY ♡</span></div>
+      <section class="hero-section section-anchor" id="inicio">
+        <div class="topline"><span class="eyebrow">TERÇA-FEIRA • SEU CANTINHO DE ESTUDOS</span><span class="today-date" id="today-date"></span></div>
+        <div class="welcome">
+          <div><p class="eyebrow pink">OLÁ, ESTUDANTE! ♡</p><h1>Suas ideias merecem<br><em>ganhar o mundo.</em></h1>
+            <p class="welcome-copy">Organize suas redações, pratique sua escrita e acompanhe cada pequena conquista.</p>
+            <a class="primary-link" href="#nova-redacao">Escrever uma redação <span>→</span></a>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="art-circle"></div><div class="paper-card"><span>♡</span><i>suas palavras,<br>seu futuro.</i><small>STUDY NOTES</small></div><span class="sparkle s1">✦</span><span class="sparkle s2">✧</span><span class="sparkle s3">♡</span></div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon">✎</div><div><p>Redações salvas</p><strong id="total-redacoes">0</strong></div><span class="stat-foot">no seu arquivo</span></article>
+          <article class="stat-card"><div class="stat-icon">♡</div><div><p>Temas praticados</p><strong id="total-temas">0</strong></div><span class="stat-foot">assuntos explorados</span></article>
+          <article class="stat-card"><div class="stat-icon">⌁</div><div><p>Palavras escritas</p><strong id="total-palavras">0</strong></div><span class="stat-foot">ideias colocadas no papel</span></article>
+        </div>
+      </section>
+
+      <section class="content-section section-anchor" id="nova-redacao">
+        <div class="section-heading"><div><p class="eyebrow pink">HORA DE COLOCAR AS IDEIAS NO PAPEL</p><h2 id="form-heading">Nova redação</h2><p>Não precisa ficar perfeito de primeira. Comece.</p></div><span class="heading-decoration">✿</span></div>
+        <form id="form-redacao" class="editor-card">
+          <input type="hidden" id="essay-id">
+          <div class="form-row">
+            <label>Título da redação<input id="titulo" type="text" maxlength="100" placeholder="Ex.: Os desafios da educação no Brasil" required></label>
+            <label>Tema / categoria<input id="tema" type="text" maxlength="80" placeholder="Ex.: Educação, tecnologia, meio ambiente..." required></label>
+          </div>
+          <label for="texto-redacao">Sua redação</label>
+          <textarea id="texto-redacao" rows="13" placeholder="Introdução, desenvolvimento, conclusão... escreva no seu tempo ♡" required></textarea>
+          <div class="editor-footer"><div class="writing-count"><span id="word-count">0 palavras</span><span>•</span><span id="char-count">0 caracteres</span></div><div class="form-actions"><button type="button" class="button subtle" id="cancelar-edicao" hidden>Cancelar</button><button type="submit" class="button primary" id="botao-salvar">Salvar redação ♡</button></div></div>
+          <p class="privacy-hint">♡ Suas redações ficam salvas neste navegador, neste dispositivo.</p>
+        </form>
+      </section>
+
+      <section class="content-section section-anchor" id="minhas-redacoes">
+        <div class="section-heading"><div><p class="eyebrow pink">SEU ARQUIVO PESSOAL</p><h2>Minhas redações</h2><p>Um registro de tudo o que você já construiu.</p></div><span class="heading-decoration">♡</span></div>
+        <div class="library-toolbar"><label class="search-box"><span>⌕</span><input type="search" id="pesquisar-redacao" placeholder="Pesquisar por título ou tema..."></label><select id="filtro-tema" aria-label="Filtrar por tema"><option value="">Todos os temas</option></select><select id="ordenacao" aria-label="Ordenar redações"><option value="recentes">Mais recentes</option><option value="antigas">Mais antigas</option><option value="az">Título (A–Z)</option></select></div>
+        <div id="lista-redacoes" class="essay-grid"><div class="empty-state"><span>♡</span><h3>Seu arquivo começa aqui</h3><p>Quando salvar sua primeira redação, ela vai aparecer neste espaço.</p><a href="#nova-redacao">Escrever agora →</a></div></div>
+      </section>
+
+      <section class="content-section section-anchor" id="correcao">
+        <div class="section-heading"><div><p class="eyebrow pink">UM OLHAR A MAIS SOBRE SUA ESCRITA</p><h2>Revisar minha redação</h2><p>Uma ajudinha para identificar pontos que você pode melhorar.</p></div><span class="heading-decoration">✧</span></div>
+        <div class="review-card"><div class="review-intro"><div class="review-icon">✎</div><div><h3>Revisão orientativa</h3><p>Escolha uma redação salva para receber uma análise básica de estrutura, extensão e conectivos.</p></div></div>
+          <label for="redacao-correcao">Escolha uma redação<select id="redacao-correcao"><option value="">Selecione uma redação...</option></select></label>
+          <button class="button primary" id="analisar-redacao" type="button">Analisar minha escrita ♡</button>
+          <div id="resultado-correcao" class="review-result" aria-live="polite"><p> sua análise aparecerá aqui. Esta ferramenta funciona localmente e não substitui a correção de uma professora ou uma IA conectada.</p></div>
+        </div>
+      </section>
+
+      <section class="content-section section-anchor" id="progresso">
+        <div class="section-heading"><div><p class="eyebrow pink">CADA PALAVRA CONTA</p><h2>Meu progresso</h2><p>Olhe para trás com carinho e veja o quanto já caminhou.</p></div><span class="heading-decoration">↗</span></div>
+        <div class="progress-layout"><article class="progress-card"><p class="card-kicker">CONSTÂNCIA</p><h3>Seu ritmo de escrita</h3><div class="progress-number"><strong id="dias-estudo">0</strong><span>dias com redações salvas</span></div><p class="muted">Continue praticando, mesmo que seja um pouquinho por dia.</p></article><article class="progress-card"><p class="card-kicker">SEUS TEMAS</p><h3>Assuntos que você explorou</h3><div id="temas-progresso" class="topic-list"><p class="muted">Seus temas aparecerão aqui.</p></div></article></div>
+      </section>
+
+      <footer class="page-footer"><span>STUDY ♡</span><p>Feito com carinho, uma redação de cada vez.</p><div class="data-actions"><button id="exportar-dados" class="text-button" type="button">Exportar backup</button><label class="text-button import-label" for="importar-dados">Importar backup<input id="importar-dados" type="file" accept="application/json" hidden></label></div></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
