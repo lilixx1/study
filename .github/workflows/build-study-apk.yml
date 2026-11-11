@@ -1,0 +1,91 @@
+name: Build STUDY Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "STUDY/**"
+      - ".github/workflows/build-study-apk.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get project
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Bubblewrap
+        run: npm install --global @bubblewrap/cli
+
+      - name: Configure TWA project
+        working-directory: android-app
+        run: |
+          mkdir -p .
+          cat > twa-manifest.json <<'EOF'
+          {
+            "packageId": "app.netlify.darlinggnome.study.twa",
+            "host": "darling-gnome-0fbda6.netlify.app",
+            "name": "STUDY — Redações",
+            "launcherName": "STUDY",
+            "display": "standalone",
+            "displayOverride": ["standalone", "minimal-ui"],
+            "themeColor": "#fff4f8",
+            "themeColorDark": "#fff4f8",
+            "navigationColor": "#fff4f8",
+            "navigationColorDark": "#fff4f8",
+            "navigationDividerColor": "#00000000",
+            "navigationDividerColorDark": "#00000000",
+            "backgroundColor": "#fff4f8",
+            "enableNotifications": false,
+            "startUrl": "/",
+            "iconUrl": "https://darling-gnome-0fbda6.netlify.app/icons/study-icon-512.png",
+            "maskableIconUrl": "https://darling-gnome-0fbda6.netlify.app/icons/study-icon-512.png",
+            "splashScreenFadeOutDuration": 300,
+            "signingKey": {
+              "path": "./android.keystore",
+              "alias": "study"
+            },
+            "appVersionCode": 1,
+            "appVersion": "1.0.0",
+            "shortcuts": [],
+            "generatorApp": "@bubblewrap/cli",
+            "webManifestUrl": "https://darling-gnome-0fbda6.netlify.app/manifest.webmanifest",
+            "fallbackType": "customtabs",
+            "enableSiteSettingsShortcut": true,
+            "isChromeOSOnly": false,
+            "isMetaQuest": false,
+            "orientation": "portrait",
+            "fullScopeUrl": "https://darling-gnome-0fbda6.netlify.app/",
+            "minSdkVersion": 23,
+            "additionalTrustedOrigins": []
+          }
+          EOF
+          bubblewrap update --manifest=.
+
+      - name: Build installable debug APK
+        working-directory: android-app
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: STUDY-Android-APK
+          path: android-app/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
