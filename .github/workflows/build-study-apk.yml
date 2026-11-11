@@ -27,12 +27,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Install Android packages
-        run: |
-          SDKMANAGER="$(find "${ANDROID_HOME:-/usr/local/lib/android/sdk}/cmdline-tools" -name sdkmanager -type f | head -n 1)"
-          yes | "$SDKMANAGER" --licenses
-          "$SDKMANAGER" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+        with:
+          packages: platform-tools platforms;android-35 build-tools;35.0.0
 
       - name: Install Bubblewrap
         run: npm install --global @bubblewrap/cli
