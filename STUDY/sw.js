@@ -1,5 +1,14 @@
-const CACHE_NAME = "study-pwa-v1";
-const APP_FILES = ["./","./index.html","./css/style.css","./js/app.js","./manifest.webmanifest","./icons/study-icon.svg"];
+const CACHE_NAME = "study-pwa-v2";
+const APP_FILES = [
+  "./",
+  "./index.html",
+  "./css/style.css",
+  "./js/app.js",
+  "./manifest.webmanifest",
+  "./icons/study-icon.svg",
+  "./icons/study-icon-192.png",
+  "./icons/study-icon-512.png"
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_FILES)).then(() => self.skipWaiting()));
