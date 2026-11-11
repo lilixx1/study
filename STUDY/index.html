@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#fff4f8">
   <meta name="description" content="STUDY — seu cantinho delicado para escrever, organizar e acompanhar suas redações.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="STUDY">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/study-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/study-icon.svg">
   <title>STUDY</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,5 +100,14 @@
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="js/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch((error) => {
+          console.error("Não foi possível preparar o modo offline:", error);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
