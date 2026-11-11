@@ -78,7 +78,7 @@ jobs:
             "additionalTrustedOrigins": []
           }
           EOF
-          bubblewrap update --manifest=.
+          printf 'n\n' | bubblewrap update --manifest=.
 
       - name: Build installable debug APK
         working-directory: android-app
