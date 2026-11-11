@@ -27,9 +27,14 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          tools: false
 
       - name: Install Bubblewrap
         run: npm install --global @bubblewrap/cli
+
+      - name: Prepare Android folder
+        run: mkdir -p android-app
 
       - name: Configure TWA project
         working-directory: android-app
